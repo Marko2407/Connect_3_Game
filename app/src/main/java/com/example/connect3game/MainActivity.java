@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     // 0: yellow  1:red  2:empty
     int[] gameState = {2, 2, 2, 2, 2, 2, 2, 2, 2};
     int[][] winningPostions = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6 },{1, 4, 7},{2, 5, 8}, {0, 4, 8},{2, 4, 6}};
+    int[] draw ={0, 1, 2, 3, 4, 5, 6, 7, 8};
     int activePlayer = 0;
     boolean gameActive = true;
 
@@ -42,16 +43,37 @@ public class MainActivity extends AppCompatActivity {
                 String winner = "";
                 if (activePlayer == 1) {
                     winner = "Yellow";
-                } else {
+                }
+                else {
                     winner = "Red";
                 }
+
 
                 Button playAgainButton = (Button) findViewById(R.id.playAgainButton);
                 TextView winnerTextView = (TextView) findViewById(R.id.winnerTextView);
                 winnerTextView.setText(winner + " has won!");
                 playAgainButton.setVisibility(View.VISIBLE);
                 winnerTextView.setVisibility(View.VISIBLE);
+            }
+            else { //ako je neriješeno
+                boolean gameISOver = true;
+                for(int counterState: gameState) {
 
+                    if(counterState == 2) {
+
+                        gameISOver = false;
+
+                    }
+                }
+                if(gameISOver) {
+
+                    TextView winnerTextView = (TextView) findViewById(R.id.winnerTextView);
+                    winnerTextView.setText("It's a draw!");
+                    Button playAgainButton = (Button) findViewById(R.id.playAgainButton);
+                    winnerTextView.setVisibility(View.VISIBLE);
+                    playAgainButton.setVisibility(View.VISIBLE);
+
+                }
             }
         }
     }
